@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f5ef">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Карман">
+  <meta name="description" content="Маленькое место для мыслей. Локальные заметки и проверка работы без интернета.">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./icon-180.png">
+  <link rel="icon" href="./icon-192.png" type="image/png">
+  <link rel="stylesheet" href="./style.css">
+  <title>Карман — заметки без сети</title>
+</head>
+<body>
+  <svg class="sprite" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+    <symbol id="i-note" viewBox="0 0 24 24"><path d="M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z"/><path d="M9 8h6M9 12h6M9 16h4"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+    <symbol id="i-signal" viewBox="0 0 24 24"><path d="M4 18v2M9 13v7M14 8v12M19 3v17"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v.1"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M5 16v4h14v-4"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7M14 10v7"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4 4"/></symbol>
+  </defs></svg>
+  <div class="app">
+    <header class="brandbar"><a href="#notes" class="brand" aria-label="Карман, заметки"><span class="brand-icon"><svg><use href="#i-note"/></svg></span>карман<span class="brand-dot">.</span></a><span class="local-label"><span></span> только у тебя</span></header>
+    <main>
+      <section id="notes-page" class="page" aria-labelledby="notes-heading">
+        <div class="eyebrow">МАЛЕНЬКОЕ МЕСТО ДЛЯ МЫСЛЕЙ</div>
+        <h1 id="notes-heading">Всё важное.<br><span>Под рукой.</span></h1>
+        <p class="intro">Поймай мысль, пока не убежала.<br>Заметки сохраняются на этом устройстве.</p>
+        <button class="offline-card" id="offline-card" type="button"><span class="status-orb"><svg><use href="#i-check"/></svg></span><span><strong id="offline-title">Готовим офлайн-запуск…</strong><small id="offline-subtitle">Сохраняем приложение на устройстве</small></span><svg class="chevron"><use href="#i-arrow"/></svg></button>
+        <div class="section-title"><h2>Мои заметки <span id="note-count">0</span></h2><button id="add-note" class="add-button" aria-label="Новая заметка"><svg><use href="#i-plus"/></svg></button></div>
+        <label class="search"><svg><use href="#i-search"/></svg><input id="search" type="search" placeholder="Найти мысль…" aria-label="Поиск заметок"></label>
+        <div id="note-list" class="note-list"></div>
+        <div id="empty" class="empty" hidden><div class="empty-drawing"><svg><use href="#i-note"/></svg><span>✦</span></div><h3>Здесь будет твоя первая мысль</h3><p>Список покупок, внезапная идея<br>или просто пара слов для себя.</p><button class="primary" id="first-note"><svg><use href="#i-plus"/></svg>Записать мысль</button></div>
+        <div id="no-results" class="empty" hidden><h3>Пока ничего не нашлось</h3><p>Попробуй другое слово.</p></div>
+        <p class="quiet-footer">Без аккаунта. Без отправки заметок на сервер.</p>
+      </section>
+      <section id="test-page" class="page" aria-labelledby="test-heading" hidden>
+        <div class="eyebrow">НЕБОЛЬШОЙ ЭКСПЕРИМЕНТ</div><h1 id="test-heading">А если<br><span>без сети?</span></h1><p class="intro">Проверим, что твой карман<br>всегда с тобой.</p>
+        <div class="status-list"><div><span>Офлайн-файлы</span><strong id="cache-state">Проверяем…</strong></div><div><span>Режим запуска</span><strong id="display-state">В браузере</strong></div><div><span>Сеть устройства</span><strong id="network-state">—</strong></div><div><span>Хранение заметок</span><strong id="storage-state">Проверяем…</strong></div></div>
+        <button id="check-offline" class="secondary full">Проверить файлы ещё раз</button>
+        <div class="instruction-card"><h2>Тест в авиарежиме</h2><ol class="steps"><li><span>1</span><p>Добавь «Карман» на экран «Домой» и открой с новой иконки.</p></li><li><span>2</span><p>Дождись статуса «Файлы готовы» и создай заметку.</p></li><li><span>3</span><p>Включи авиарежим. Отдельно выключи Wi-Fi, если он остался включён.</p></li><li><span>4</span><p>Полностью закрой приложение через переключатель приложений и открой снова с иконки.</p></li><li><span>5</span><p>Проверь заметку и создай ещё одну. Перезапусти — обе должны остаться.</p></li></ol><div class="tip">Если всё получилось, запуск и сохранения работают без интернета и VPN.</div></div>
+        <p class="fine-print">Индикатор сети показывает состояние подключения устройства, а не доступность сайта из Беларуси. Её проверяем открытием ссылки без VPN.</p>
+      </section>
+      <section id="about-page" class="page" aria-labelledby="about-heading" hidden>
+        <div class="eyebrow">ТВОЁ КАРМАННОЕ ПРИЛОЖЕНИЕ</div><h1 id="about-heading">Просто.<br><span>Рядом.</span></h1><p class="intro">Небольшой тест того, как сайт<br>становится приложением.</p>
+        <div class="instruction-card"><h2>На главный экран iPhone</h2><ol class="steps"><li><span>1</span><p>Открой эту ссылку именно в Safari.</p></li><li><span>2</span><p>Нажми «Поделиться» и выбери «На экран “Домой”».</p></li><li><span>3</span><p>Если есть переключатель «Открывать как веб-приложение», включи его. Нажми «Добавить».</p></li><li><span>4</span><p>Запусти «Карман» с иконки. Адресной строки и вкладок браузера не будет.</p></li></ol></div>
+        <div class="instruction-card"><h2>Где мои заметки?</h2><p>Только в хранилище этого приложения на этом устройстве. Мы не отправляем их на сервер и не синхронизируем с другими устройствами.</p><p>Сделай первую заметку уже после запуска с иконки: хранилище Safari и установленного приложения может отличаться.</p><p>При удалении данных сайта или приложения записи могут потеряться. Сохраняй важное отдельным файлом.</p><button id="export" class="secondary full"><svg><use href="#i-download"/></svg>Скачать заметки · JSON</button><label class="import-button">Восстановить из файла<input id="import" type="file" accept="application/json,.json" hidden></label></div>
+        <div class="instruction-card"><h2>Что нужно для запуска?</h2><p>Интернет нужен для первой загрузки и обновлений. После подготовки приложение берёт свои файлы из памяти телефона. Если кеш удалён, понадобится загрузить их снова.</p><p>Платный аккаунт Apple и подключение к Mac не нужны.</p></div>
+        <p class="quiet-footer">КАРМАН · ВЕРСИЯ 1.0</p>
+      </section>
+    </main>
+    <nav class="bottom-nav" aria-label="Основные разделы"><a href="#notes" data-page="notes" class="active" aria-current="page"><svg><use href="#i-note"/></svg><span>Заметки</span></a><a href="#test" data-page="test"><svg><use href="#i-signal"/></svg><span>Без сети</span></a><a href="#about" data-page="about"><svg><use href="#i-info"/></svg><span>Об этом</span></a></nav>
+  </div>
+  <dialog id="editor"><form method="dialog" id="editor-form"><div class="editor-top"><button class="back-button" id="close-editor" type="button"><svg><use href="#i-arrow"/></svg>Заметки</button><span id="save-status" role="status">Сохранено</span></div><div class="editor-body"><label class="sr-only" for="note-title">Название</label><input id="note-title" placeholder="Название" maxlength="160" autocomplete="off"><label class="sr-only" for="note-body">Текст заметки</label><textarea id="note-body" placeholder="О чём думаешь?" maxlength="100000"></textarea></div><div class="editor-bottom"><span id="char-count">0 символов</span><button id="delete-note" type="button" class="delete-button"><svg><use href="#i-trash"/></svg>Удалить</button></div><div id="delete-confirm" class="delete-confirm" hidden><p>Удалить эту заметку?</p><button id="cancel-delete" type="button" class="secondary">Оставить</button><button id="confirm-delete" type="button" class="danger">Удалить</button></div></form></dialog>
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+  <noscript>Для работы заметок включи JavaScript в Safari.</noscript>
+  <script src="./app.js" defer></script>
+</body></html>
